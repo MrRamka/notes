@@ -2,6 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Header } from './Header';
 import { Container } from '@material-ui/core';
+import { Notes } from './Notes';
 
 export const MainPage: FC = () => {
     const { t, i18n } = useTranslation();
@@ -14,6 +15,8 @@ export const MainPage: FC = () => {
         <div>
             <Header />
             <Container>
+                <br/>
+                <Notes/>
                 <hr />
                 <button onClick={() => changeLanguage('en')}>EN</button>
                 <button onClick={() => changeLanguage('ru')}>RU</button>
