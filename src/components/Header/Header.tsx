@@ -43,16 +43,16 @@ export const Header: FC = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position='static'>
+            <AppBar position='fixed'>
                 <Toolbar>
                     <Typography className={classes.title}>
                         {t('title')}
                     </Typography>
-                    <FormControlLabel control={<Checkbox name='autoSwitchTheme' />} label='Auto theme' />
+                    <FormControlLabel control={<Checkbox name='autoSwitchTheme' />} label={t('auto_change_theme')} />
                     {
                         //todo: add theme
                     }
-                    <FormControlLabel control={<Switch name='themeControl' />} label='Change mode' />
+                    <FormControlLabel control={<Switch name='themeControl' />} label={t('change_theme')} />
                     <Select value={currentLanguage} className={classes.lang} onChange={onLanguageChange}>
                         {LANGUAGES.map((value) => (
                             <MenuItem value={getLanguageShortNameByCode(value) ?? LanguageNameShort.ENGLISH}
