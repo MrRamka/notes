@@ -1,17 +1,16 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { CloseButton, Content, Footer, Header, Modal as StyledModal, ModalShadow, ModalWrapper } from './styles';
-import { Button } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-
-type Props = {
-    setOpen: (isOpen: boolean) => void;
-    onClose?: (e: React.MouseEvent<HTMLElement>) => void;
-    onOk?: (e: React.MouseEvent<HTMLElement>) => void;
-}
+import { Content, Footer, Header, Modal as StyledModal, ModalShadow, ModalWrapper } from './styles';
+import { ThemeContext } from '../../theme-context';
+import { ThemeTypography } from '../ThemeTypography';
+import { ModalProps } from './types';
+import { CloseButton } from '../CloseButton';
+import { Button } from '../Buttons';
 
 
-export const Modal: FC<Props> = ({ children, onClose, setOpen, onOk }) => {
+export const Modal: FC<ModalProps> = (props) => {
+
+    const { children, setOpen, onOk, onClose, header, onCloseText, onOkText } = props;
 
     const handleClose = useCallback((e: React.MouseEvent<HTMLElement>) => {
         onClose?.(e);
@@ -24,21 +23,25 @@ export const Modal: FC<Props> = ({ children, onClose, setOpen, onOk }) => {
     }, [onOk, setOpen]);
 
 
+    const theme = useContext(ThemeContext);
+
     return ReactDOM.createPortal(
         <>
             <ModalShadow onClick={handleClose} />
             <ModalWrapper>
-                <StyledModal>
+                <StyledModal backgroundColor={theme.theme.surface}>
                     <Header>
-                        Modal header
-                        <CloseButton onClick={handleClose} style={{ float: 'right' }}><CloseIcon /></CloseButton>
+                        <ThemeTypography>
+                            {header}
+                        </ThemeTypography>
+                        <CloseButton onClick={handleClose} />
                     </Header>
                     <Content>
                         {children}
                     </Content>
                     <Footer>
-                        <Button variant='outlined' onClick={handleClose}>Close</Button>
-                        <Button variant='outlined' color='primary' onClick={handleSubmit}>Ok</Button>
+                        <Button onClick={handleClose} buttonColor={theme.theme.error}>{onCloseText}</Button>
+                        <Button onClick={handleSubmit} buttonColor={theme.theme.primary}>{onOkText}</Button>
                     </Footer>
                 </StyledModal>
             </ModalWrapper>

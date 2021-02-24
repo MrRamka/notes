@@ -1,19 +1,21 @@
-import React, { FC, useCallback, useState } from 'react';
-import { Card as MaterialCard, CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
+import React, { FC, useCallback, useContext, useState } from 'react';
+import { CardContent, createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
 import { CardType } from '../../types';
+import { Card as ThemedCard, CardTitle } from './styles';
 import { CardModal } from '../CardModal';
-
-type Props = {
-    card: CardType;
-}
+import { ThemeContext } from '../../theme-context';
+import { CardProps } from './types';
+import { ThemeTypography } from '../ThemeTypography';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
             marginBottom: theme.spacing(1),
+            maxHeight: 70
         },
         title: {
-            marginBottom: theme.spacing(1),
+            fontWeight: 'bold',
+            display: 'block'
         },
     }),
 );
@@ -23,25 +25,26 @@ const useStyles = makeStyles((theme: Theme) =>
  *  Render single card
  * @param card { CardType } Card
  */
-export const Card: FC<Props> = ({ card }) => {
+export const Card: FC<CardProps> = ({ card }) => {
 
     const classes = useStyles();
+    const theme = useContext(ThemeContext);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     const handleCardClick = useCallback(() => {
-        setModalOpen(!modalOpen)
-    }, [modalOpen])
+        setModalOpen(!modalOpen);
+    }, [modalOpen]);
 
     //todo: render description 100 symbols
     return (
         <>
-            <MaterialCard className={classes.card} onClick={handleCardClick}>
+            <ThemedCard className={classes.card} onClick={handleCardClick} themeColor={theme.theme.card} style={{ cursor: 'pointer'}}>
                 <CardContent>
-                    <Typography variant='subtitle1' className={classes.title}>{card.title}</Typography>
-                    {card.description}
+                    <CardTitle className={classes.title}>{card.title}</CardTitle>
+                    <ThemeTypography>{card.description}</ThemeTypography>
                 </CardContent>
-            </MaterialCard>
-            {modalOpen && <CardModal setModalOpen={setModalOpen} card={card}/>}
+            </ThemedCard>
+            {modalOpen && <CardModal setModalOpen={setModalOpen} card={card} />}
         </>
     );
 };

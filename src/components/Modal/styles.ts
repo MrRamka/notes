@@ -10,16 +10,20 @@ export const ModalShadow = styled.div`
   opacity: 0.45;
   z-index: 4;
 `;
+type Props = {
+    backgroundColor: string
+}
 
-export const Modal = styled.div`
+export const Modal = styled.div<Props>`
   min-width: 500px;
   margin: 0 auto;
-  background: white;
+  background: ${props => props.backgroundColor};;
   z-index: 1000;
   position: fixed;
   top: 15%;
   border-radius: 3px;
 `;
+
 
 export const ModalWrapper = styled.div`
   width: 100%;
@@ -27,6 +31,7 @@ export const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   top: 0;
+  
 `;
 
 export const Header = styled.div`
@@ -41,12 +46,5 @@ export const Content = styled.div`
 export const Footer = styled.div`
   border-top: 1px silver solid;
   padding: 1rem 2rem;
-`;
-
-export const CloseButton = styled.span`
-    float: right;
-    :hover {
-      cursor: pointer;
-    }
 `;
 

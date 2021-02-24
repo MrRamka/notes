@@ -1,34 +1,38 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useContext } from 'react';
 import { ColumnPaper } from './styles';
-import { createStyles, makeStyles, Theme, Typography } from '@material-ui/core';
-import { CardType } from '../../types';
+import { Link } from '@material-ui/core';
+import { ColumnType } from '../../types';
 import { Card } from '../Card';
+import { ThemeContext } from '../../theme-context';
+import { ThemeTypography } from '../ThemeTypography';
+import { AddCard } from '../AddCard';
 
 type Props = {
-    title: string;
-    cards: CardType[];
+    column: ColumnType,
 }
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-        },
-    }),
-);
 
+export const Column: FC<Props> = (props) => {
 
-export const Column: FC<Props> = ({ title, cards }) => {
+    const { id, title, cards } = props.column;
 
-    const classes = useStyles();
+    const themeContext = useContext(ThemeContext);
+
+    const handleAddColumnClick = useCallback(() => {
+
+    }, []);
 
     return (
-        <div className={classes.root}>
-            <ColumnPaper elevation={3}>
-                <Typography variant='h6'>{title}</Typography>
+        <div style={{ margin: '0 1rem', width: 300, flexShrink: 0 }}>
+            <ColumnPaper elevation={3} style={{ backgroundColor: themeContext.theme.column }}>
+                <ThemeTypography styles={{ fontSize: '1.2rem', marginBottom: '1rem' }}>{title}</ThemeTypography>
 
                 {cards.map(card => (
                     <Card key={card.id} card={card} />),
                 )}
+
+                <AddCard columnId={id}/>
             </ColumnPaper>
         </div>
+
     );
 };

@@ -24,7 +24,13 @@ export const CardModal: FC<Props> = ({ setModalOpen, card }) => {
     return (
         <>
             {isOpen &&
-            <Modal onClose={handleCloseCardModal} setOpen={setIsOpen}>
+            <Modal
+                onClose={handleCloseCardModal}
+                setOpen={setIsOpen}
+                header='Edit card'
+                onCloseText='Close'
+                onOkText='Ok'
+            >
                 <input value={cardTitle} onChange={handleTitleInputChange} />
             </Modal>
             }
