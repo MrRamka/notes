@@ -5,6 +5,7 @@ export type InputType = {
     name: string;
     label: React.ReactNode;
     rules?: RuleType[];
+    value?: string;
 }
 
 export type InputStylesType = {

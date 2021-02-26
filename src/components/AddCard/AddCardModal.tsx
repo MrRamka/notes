@@ -4,7 +4,7 @@ import { uuidv4 } from '../../utils';
 import { CardType } from '../../types';
 import { addCard } from '../../redux-store/listReduser/actions';
 import { Modal } from '../Modal';
-import { Input } from '../Input';
+import { CardForm } from '../CardForm';
 
 type Props = {
     isOpen: boolean,
@@ -24,8 +24,9 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
             description: cardDescription,
             id: uuid,
             title: cardTitle,
+            columnId: columnId
         };
-        dispatch(addCard({ card, columnId }));
+        dispatch(addCard(card));
     }, [cardTitle, cardDescription, columnId, dispatch]);
 
     const onInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -45,8 +46,7 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
                 onOk={handleSave}
                 header='New card'
             >
-                <Input onChange={onInputChange} name='title' label='Title'/>
-                <Input onChange={onDescriptionChange} name='description' label='Description'/>
+                <CardForm onInputChange={onInputChange} onDescriptionChange={onDescriptionChange} />
             </Modal>
         </>
     );

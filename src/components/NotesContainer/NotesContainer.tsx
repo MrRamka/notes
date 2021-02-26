@@ -4,6 +4,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { selectors } from '../../redux-store';
 import { AddNewColumn } from '../AddNewColumn';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
                 margin: theme.spacing(1),
                 width: theme.spacing(42),
             },
-        }
+        },
     }),
 );
 
@@ -36,9 +38,11 @@ export const NotesContainer: FC = () => {
             <div style={{
                 display: 'flex',
             }}>
-                {
-                    columns.map(column => (<Column key={column.id} column={column} />))
-                }
+                <DndProvider backend={HTML5Backend}>
+                    {
+                        columns.map(column => (<Column key={column.id} column={column} />))
+                    }
+                </DndProvider>
                 <AddNewColumn />
             </div>
         </div>

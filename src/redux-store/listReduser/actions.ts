@@ -33,10 +33,20 @@ export const addColumn = (column: ColumnType): AddNewColumnAction => ({
 
 //todo: add type
 export interface AddNewCardAction extends Action<ListActionType.ADD_NEW_CARD> {
-    payload: { card: CardType, columnId: string};
+    payload: CardType;
 }
 
-export const addCard = (addCardType : { card: CardType, columnId: string}): AddNewCardAction => ({
-    payload: addCardType,
+export const addCard = (card: CardType): AddNewCardAction => ({
+    payload: card,
     type: ListActionType.ADD_NEW_CARD,
+});
+
+
+export interface UpdateCardColumnAction extends Action<ListActionType.UPDATE_CARD_COLUMN> {
+    payload: { card: CardType, columnId: string };
+}
+
+export const updateCardColumn = (updateCardColumnType: { card: CardType, columnId: string }): UpdateCardColumnAction => ({
+    payload: updateCardColumnType,
+    type: ListActionType.UPDATE_CARD_COLUMN,
 });

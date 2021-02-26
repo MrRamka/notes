@@ -6,7 +6,7 @@ import { ThemeTypography } from '../ThemeTypography';
 
 export const Input: FC<InputType> = (props) => {
 
-    const { onChange, name, label, rules } = props;
+    const { onChange, name, label, rules, value = '' } = props;
 
 
     const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +14,7 @@ export const Input: FC<InputType> = (props) => {
 
         //Rules
 
-    }, [onChange])
+    }, [onChange]);
 
     const themeContext = useContext(ThemeContext);
 
@@ -32,6 +32,7 @@ export const Input: FC<InputType> = (props) => {
                 color={themeContext.theme.on_surface}
                 name={name}
                 onChange={handleInputChange}
+                defaultValue={value}
             />
         </Wrapper>
     );
