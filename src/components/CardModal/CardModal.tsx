@@ -8,25 +8,31 @@ import { updateCard } from '../../redux-store/listReduser/actions';
 type Props = {
     card: CardType
     columnId: string
+    onCancel: () => void;
+    cardTitle: string,
+    setCardTitle: (title: string) => void;
+    cardDescription: string
+    setCardDescription: (desc: string) => void;
 }
 
-export const CardModal: FC<Props> = ({ card, columnId }) => {
+export const CardModal: FC<Props> = (props) => {
 
-    const [cardTitle, setCardTitle] = useState<string>(card.title);
-    const [cardDescription, setCardDescription] = useState<string>(card.description || '');
+    const { card, onCancel, cardTitle, cardDescription, setCardDescription, setCardTitle } = props;
+
     const [isOpen, setIsOpen] = useState<boolean>(true);
 
     const dispatch = useDispatch();
 
     const handleCloseCardModal = useCallback(() => {
         setIsOpen(false);
-    }, [setIsOpen]);
+        onCancel();
+    }, [setIsOpen, onCancel]);
 
     const handleTitleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setCardTitle(event.target.value);
     }, []);
 
-    const handleDescriptionInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const handleDescriptionInputChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
         setCardDescription(event.target.value);
     }, []);
 

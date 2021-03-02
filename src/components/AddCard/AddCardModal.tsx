@@ -5,6 +5,7 @@ import { CardType } from '../../types';
 import { addCard } from '../../redux-store/listReduser/actions';
 import { Modal } from '../Modal';
 import { CardForm } from '../CardForm';
+import { AdBlock } from '../AdBlock';
 
 type Props = {
     isOpen: boolean,
@@ -33,7 +34,7 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
         setCardTitle(event.target.value);
     }, []);
 
-    const onDescriptionChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const onDescriptionChange = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
         setCardDescription(event.target.value);
     }, []);
 
@@ -47,6 +48,8 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
                 header='New card'
             >
                 <CardForm onInputChange={onInputChange} onDescriptionChange={onDescriptionChange} />
+                <AdBlock loadingType={false}>
+                </AdBlock>
             </Modal>
         </>
     );

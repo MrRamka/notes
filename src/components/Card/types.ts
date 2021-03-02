@@ -6,5 +6,5 @@ export type CardProps = {
 }
 
 export type CardStylesProps = {
-    themeColor: string;
+    themecolor: string;
 }

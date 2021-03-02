@@ -1,9 +1,19 @@
 import styled from 'styled-components';
 import { InputStylesType, LabelStylesType } from './types';
+import { TextareaAutosize } from '@material-ui/core';
 
 export const StyledInput = styled.input<InputStylesType>`
   border-color: ${props => props.borderColor};
-  background-color: ${props => props.backgroundColor};
+  background-color: ${props => props.backgroundcolor};
+  color: ${props => props.color};
+  border-style: solid;
+  border-radius: 1px;
+  border-width: 1px;
+`;
+
+export const StyledTextArea = styled(TextareaAutosize)<InputStylesType>`
+  border-color: ${props => props.borderColor};
+  background-color: ${props => props.backgroundcolor};
   color: ${props => props.color};
   border-style: solid;
   border-radius: 1px;

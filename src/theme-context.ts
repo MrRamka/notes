@@ -1,5 +1,5 @@
 import React from 'react';
-import { darkTheme, lightTheme, ThemeType } from './theme';
+import { darkTheme, lightTheme, ThemeFields, ThemeType } from './theme';
 
 export const themes: ThemeType = {
     light: lightTheme,
@@ -8,6 +8,7 @@ export const themes: ThemeType = {
 
 export const ThemeContext = React.createContext({
     theme: themes.dark,
-    toggleTheme: () => {
-    },
+    toggleTheme: () => {},
+    setTheme: (theme: ThemeFields) => {},
+    autoThemeChange: true,
 });

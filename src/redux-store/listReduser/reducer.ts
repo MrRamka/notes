@@ -1,65 +1,20 @@
 import { CardType, ColumnType } from '../../types';
-import {
-    AddNewCardAction,
-    AddNewColumnAction,
-    UpdateCardAction,
-    UpdateCardColumnAction,
-    UpdateColumnListAction,
-} from './actions';
 import { ListActionType } from './types';
+import { AnyAction } from 'redux';
 
 type ColumnsStore = {
     list: ColumnType[];
 }
 
 const initialState: ColumnsStore = {
-    list: [
-        {
-            id: '1',
-            title: 'test',
-            cards: [
-                { id: 'a', title: 'aaa', description: 'asdasdas', columnId: '1' },
-                { id: 'b', columnId: '1', title: 'aaa', description: 'asdasdas' },
-            ],
-        },
-        {
-            id: '2',
-            title: 'test2',
-            cards: [
-                { id: 'c', title: 'aaa', columnId: '2' },
-                { id: 'd', title: 'aaa', description: 'asdasdas', columnId: '2' },
-                { id: 'e', title: 'aaa', columnId: '2' },
-            ],
-        },
-        {
-            id: '3',
-            title: 'test2',
-            cards: [
-                { id: 'f', title: 'aaa', columnId: '3' },
-                { id: 'g', title: 'aaa', description: 'asdasdas', columnId: '3' },
-                { id: 'k', title: 'aaa', columnId: '3' },
-            ],
-        },
-        {
-            id: '4',
-            title: 'test2',
-            cards: [
-                { id: 'l', title: 'aaa', columnId: '4' },
-                { id: 'm', title: 'aaa', description: 'asdasdas', columnId: '4' },
-                { id: 'n', title: 'aaa', columnId: '4' },
-            ],
-        },
-    ],
+    list: [],
 };
 
 export const listReducer = (
     state = initialState,
-    action: UpdateColumnListAction |
-        AddNewColumnAction |
-        AddNewCardAction |
-        UpdateCardAction |
-        UpdateCardColumnAction,
+    action: AnyAction,
 ): ColumnsStore => {
+    console.log(state.list);
     switch (action.type) {
         case ListActionType.ADD_NEW_COLUMN:
             return {
@@ -107,9 +62,7 @@ export const listReducer = (
             const prevColumnId = action.payload.card.columnId;
             const columns = state.list.map(column => {
                 if (column.id === prevColumnId) {
-                    console.log(column.cards);
                     const cards = column.cards.filter(card => card.id !== action.payload.card.id);
-                    console.log(cards);
                     return { ...column, cards: cards };
                 }
 
@@ -124,6 +77,25 @@ export const listReducer = (
             return {
                 ...state,
                 list: columns,
+            };
+        case ListActionType.DELETE_COLUMN:
+            const filteredColumns = state.list.filter(column => column.id !== action.payload);
+            return {
+                ...state,
+                list: filteredColumns,
+            };
+
+        case ListActionType.DELETE_CARD:
+            const columnsFiltered = state.list.map(column => {
+                const cards = column.cards.filter(card => card.id !== action.payload);
+                return {
+                    ...column,
+                    cards: cards,
+                };
+            });
+            return {
+                ...state,
+                list: columnsFiltered,
             };
         default:
             return state;

@@ -4,5 +4,5 @@ export type ButtonProps = {
 }
 
 export type ButtonStyleProps = {
-    themeColor: string;
+    themecolor: string;
 }

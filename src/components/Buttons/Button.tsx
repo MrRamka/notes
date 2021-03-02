@@ -17,7 +17,7 @@ export const Button: FC<ButtonProps> = ({ onClick, children, buttonColor }) => {
                 variant='outlined'
                 size='small'
                 onClick={handleClick}
-                themeColor={btnColor}
+                themecolor={btnColor}
             >
                 {children}
             </StyledButton>

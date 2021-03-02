@@ -50,3 +50,21 @@ export const updateCardColumn = (updateCardColumnType: { card: CardType, columnI
     payload: updateCardColumnType,
     type: ListActionType.UPDATE_CARD_COLUMN,
 });
+
+export interface DeleteColumnAction extends Action<ListActionType.DELETE_COLUMN> {
+    payload: string;
+}
+
+export const deleteColumn = (columnId: string): DeleteColumnAction => ({
+    payload: columnId,
+    type: ListActionType.DELETE_COLUMN,
+});
+
+export interface DeleteCardAction extends Action<ListActionType.DELETE_CARD> {
+    payload: string;
+}
+
+export const deleteCard = (cardId: string): DeleteCardAction => ({
+    payload: cardId,
+    type: ListActionType.DELETE_CARD,
+});

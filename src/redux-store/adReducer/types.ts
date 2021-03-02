@@ -1,0 +1,6 @@
+export enum AdActionType {
+    LOADING= 'LOADING',
+    ADD_AD = 'ADD_AD',
+    REMOVE_ADS = 'REMOVE_ADS',
+    UPDATE_DISPLAYED_AD = 'UPDATE_DISPLAYED_AD',
+}

@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import { ButtonStyleProps } from './types';
 
 export const StyledButton = styled(Button)<ButtonStyleProps>`
-  color: ${props => props.themeColor};
-  border-color: ${props => props.themeColor};
+  color: ${props => props.themecolor};
+  border-color: ${props => props.themecolor};
   margin: 0.2rem;
 `;

@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
+//todo: reactor
 export type InputType = {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     name: string;
@@ -8,9 +9,17 @@ export type InputType = {
     value?: string;
 }
 
+export type TextAreaType = {
+    onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    name: string;
+    label: React.ReactNode;
+    rules?: RuleType[];
+    value?: string;
+}
+
 export type InputStylesType = {
     borderColor: string;
-    backgroundColor: string;
+    backgroundcolor: string;
     color: string;
 }
 

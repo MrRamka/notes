@@ -28,7 +28,7 @@ export const Input: FC<InputType> = (props) => {
             </StyledLabel>
             <StyledInput
                 borderColor={themeContext.theme.on_surface}
-                backgroundColor={themeContext.theme.surface}
+                backgroundcolor={themeContext.theme.surface}
                 color={themeContext.theme.on_surface}
                 name={name}
                 onChange={handleInputChange}
