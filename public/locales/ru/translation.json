@@ -5,5 +5,20 @@
   "description": {
     "part1": "Чтобы начать работу, отредактируйте и сохраните файл <1>src/App.js</1>.",
     "part2": "С помощью кнопок переключайте язык между английским и русским."
-  }
+  },
+  "addNewCard": "Добавить новую карточку",
+  "addCardModalHeader": "Новая заметка",
+  "addCardModalOkText": "Создать новую заметку",
+  "cancelText": "Отмена",
+  "cardTitle": "Название заметки",
+  "cardDescription": "Описание заметки",
+  "addNewColumn": "Добавить новую колонку",
+  "addColumnModalOkText": "Создать колонку",
+  "addColumnModalHeader": "Новая колонка",
+  "addColumnTitle": "Название колонки",
+  "deleteCardText": "Вы действительно хотите удалить",
+  "editCardText": "Вы действительно хотите отменить изменения?",
+  "okText": "Хорошо",
+  "deleteColumnModalTitle": "Удалить заметку",
+  "editCard": "Изменение заметки"
 }

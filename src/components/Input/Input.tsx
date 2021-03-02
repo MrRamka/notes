@@ -4,6 +4,8 @@ import { InputType } from './types';
 import { ThemeContext } from '../../theme-context';
 import { ThemeTypography } from '../ThemeTypography';
 
+const INPUT_SIZE = 35;
+
 export const Input: FC<InputType> = (props) => {
 
     const { onChange, name, label, rules, value = '' } = props;
@@ -33,6 +35,7 @@ export const Input: FC<InputType> = (props) => {
                 name={name}
                 onChange={handleInputChange}
                 defaultValue={value}
+                size={INPUT_SIZE}
             />
         </Wrapper>
     );

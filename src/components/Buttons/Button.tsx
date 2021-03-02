@@ -3,7 +3,10 @@ import { ButtonProps } from './types';
 import { StyledButton } from './styles';
 import { ThemeContext } from '../../theme-context';
 
-export const Button: FC<ButtonProps> = ({ onClick, children, buttonColor }) => {
+export const Button: FC<ButtonProps> = (props) => {
+
+    const { onClick, children, buttonColor } = props;
+
     const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
         onClick?.(e);
     }, [onClick]);

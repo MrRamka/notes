@@ -4,15 +4,14 @@ import { useDispatch } from 'react-redux';
 import { uuidv4 } from '../../utils';
 import { ColumnType } from '../../types';
 import { addColumn } from '../../redux-store/listReduser/actions';
+import { AddColumnModalProps } from './types';
+import { useTranslation } from 'react-i18next';
+import { Input } from '../Input';
 
-type Props = {
-    isOpen: boolean,
-    setIsOpen: (valueL: boolean) => void
-}
-
-export const AddColumnModal: FC<Props> = ({ isOpen, setIsOpen }) => {
+export const AddColumnModal: FC<AddColumnModalProps> = ({ setIsOpen }) => {
 
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const [columnTitle, setColumnTitle] = useState<string>('');
 
@@ -34,12 +33,12 @@ export const AddColumnModal: FC<Props> = ({ isOpen, setIsOpen }) => {
         <>
             <Modal
                 setOpen={setIsOpen}
-                onCloseText='Cancel'
-                onOkText='Create column'
+                onCloseText={t('cancelText')}
+                onOkText={t('addColumnModalOkText')}
                 onOk={handleSave}
-                header="New column"
+                header={t('addColumnModalHeader')}
             >
-                <input onChange={onInputChange} />
+               <Input label={t('addColumnTitle')}  name="columnTitle" onChange={onInputChange}/>
             </Modal>
         </>
     );

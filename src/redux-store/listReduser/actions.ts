@@ -31,7 +31,6 @@ export const addColumn = (column: ColumnType): AddNewColumnAction => ({
 });
 
 
-//todo: add type
 export interface AddNewCardAction extends Action<ListActionType.ADD_NEW_CARD> {
     payload: CardType;
 }

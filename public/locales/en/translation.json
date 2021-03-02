@@ -5,5 +5,21 @@
   "description": {
     "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
     "part2": "Switch language between english and russian using buttons above."
-  }
+  },
+  "addNewCard": "Add new card",
+  "addCardModalHeader": "New card",
+  "addCardModalOkText": "Create card",
+  "cancelText": "Cancel",
+  "cardTitle": "Title",
+  "cardDescription": "Description",
+  "addNewColumn": "Add new column",
+  "addColumnModalOkText": "Create column",
+  "addColumnModalHeader": "New column",
+  "addColumnTitle": "Column title",
+  "deleteCardText": "Do you wont delete card",
+  "editCardText": "You sure cancel changes?",
+  "okText": "Ok",
+  "deleteColumnModalTitle": "Delete card",
+  "editCard": "Edit Card"
+
 }

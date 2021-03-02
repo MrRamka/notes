@@ -1,12 +1,20 @@
 import React, { FC, useCallback } from 'react';
 import { CardFormProps } from './types';
 import { Input, TextArea } from '../Input';
+import { useTranslation } from 'react-i18next';
 
 export const CardForm: FC<CardFormProps> = (props) => {
 
-    const { onInputChange, onDescriptionChange, titleLabel = 'Title', descriptionLabel = 'Description', onOk, descriptionValue, titleValue } = props;
+    const { t } = useTranslation();
 
-    // input functions
+    const { onInputChange,
+        onDescriptionChange,
+        titleLabel = t('cardTitle'),
+        descriptionLabel = t('cardDescription'),
+        onOk,
+        descriptionValue,
+        titleValue
+    } = props;
 
     const onOkFunction = useCallback(() => {
         onOk?.();
@@ -16,9 +24,6 @@ export const CardForm: FC<CardFormProps> = (props) => {
     return (
         <>
             <Input onChange={onInputChange} name='title' label={titleLabel} value={titleValue}/>
-            {
-                //<Input onChange={onDescriptionChange} name='description' label={descriptionLabel} value={descriptionValue} />
-            }
             <TextArea onChange={onDescriptionChange}  name='description' label={descriptionLabel} value={descriptionValue}/>
         </>
     );

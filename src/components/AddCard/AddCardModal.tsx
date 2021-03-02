@@ -6,15 +6,13 @@ import { addCard } from '../../redux-store/listReduser/actions';
 import { Modal } from '../Modal';
 import { CardForm } from '../CardForm';
 import { AdBlock } from '../AdBlock';
+import { AddCardModalType } from './types';
+import { useTranslation } from 'react-i18next';
 
-type Props = {
-    isOpen: boolean,
-    setIsOpen: (valueL: boolean) => void,
-    columnId: string;
-}
 
-export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
+export const AddCardModal: FC<AddCardModalType> = ({ setIsOpen, columnId }) => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const [cardTitle, setCardTitle] = useState<string>('');
     const [cardDescription, setCardDescription] = useState<string>('');
@@ -25,7 +23,7 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
             description: cardDescription,
             id: uuid,
             title: cardTitle,
-            columnId: columnId
+            columnId: columnId,
         };
         dispatch(addCard(card));
     }, [cardTitle, cardDescription, columnId, dispatch]);
@@ -42,14 +40,13 @@ export const AddCardModal: FC<Props> = ({ isOpen, setIsOpen, columnId }) => {
         <>
             <Modal
                 setOpen={setIsOpen}
-                onCloseText='Cancel'
-                onOkText='Create card'
+                onCloseText={t('cancelText')}
+                onOkText={t('addCardModalOkText')}
                 onOk={handleSave}
-                header='New card'
+                header={t('addCardModalHeader')}
             >
                 <CardForm onInputChange={onInputChange} onDescriptionChange={onDescriptionChange} />
-                <AdBlock loadingType={false}>
-                </AdBlock>
+                <AdBlock loadingType={false} />
             </Modal>
         </>
     );

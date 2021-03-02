@@ -24,6 +24,7 @@ export const TextArea: FC<TextAreaType> = (props) => {
                 borderColor={themeContext.theme.on_surface}
                 backgroundcolor={themeContext.theme.surface}
                 color={themeContext.theme.on_surface}
+                rowsMin={2}
             />
         </>
     );

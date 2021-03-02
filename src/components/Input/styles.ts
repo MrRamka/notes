@@ -7,8 +7,10 @@ export const StyledInput = styled.input<InputStylesType>`
   background-color: ${props => props.backgroundcolor};
   color: ${props => props.color};
   border-style: solid;
-  border-radius: 1px;
+  border-radius: 3px;
   border-width: 1px;
+  padding: 0.2rem;
+  width: 200px;
 `;
 
 export const StyledTextArea = styled(TextareaAutosize)<InputStylesType>`
@@ -16,8 +18,10 @@ export const StyledTextArea = styled(TextareaAutosize)<InputStylesType>`
   background-color: ${props => props.backgroundcolor};
   color: ${props => props.color};
   border-style: solid;
-  border-radius: 1px;
+  border-radius: 2px;
   border-width: 1px;
+  padding: 0.2rem;
+  width: 200px;
 `;
 
 export const StyledLabel = styled.label<LabelStylesType>`
