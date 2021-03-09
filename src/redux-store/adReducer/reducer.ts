@@ -21,7 +21,6 @@ const initialState: AdStore = {
 };
 
 export const adReducer = (state = initialState, action: AnyAction): AdStore => {
-    console.log(state.ads);
     switch (action.type) {
         case AdActionType.LOADING:
             return {

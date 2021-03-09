@@ -32,3 +32,8 @@ export const StyledLabel = styled.label<LabelStylesType>`
 export const Wrapper = styled.div`
   margin-bottom: 1rem;
 `;
+
+export const ErrorLabel = styled.label<LabelStylesType>`
+  color: ${props => props.color};
+  display: block;
+`;

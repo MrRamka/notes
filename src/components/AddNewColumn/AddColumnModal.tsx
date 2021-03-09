@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useState } from 'react';
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import { Modal } from '../Modal';
 import { useDispatch } from 'react-redux';
 import { uuidv4 } from '../../utils';
@@ -14,16 +14,24 @@ export const AddColumnModal: FC<AddColumnModalProps> = ({ setIsOpen }) => {
     const { t } = useTranslation();
 
     const [columnTitle, setColumnTitle] = useState<string>('');
+    const [hasErrors, setHasErrors] = useState<boolean>(true);
+    const [closeOnOk, setCloseOnOk] = useState(false);
+
+    useEffect(() => {
+        setCloseOnOk(!hasErrors);
+    }, [hasErrors]);
 
     const handleSave = useCallback(() => {
-        const uuid: string = uuidv4();
-        const newColumn: ColumnType = {
-            id: uuid,
-            title: columnTitle,
-            cards: [],
-        };
-        dispatch(addColumn(newColumn));
-    }, [columnTitle, dispatch]);
+        if (!hasErrors) {
+            const uuid: string = uuidv4();
+            const newColumn: ColumnType = {
+                id: uuid,
+                title: columnTitle,
+                cards: [],
+            };
+            dispatch(addColumn(newColumn));
+        }
+    }, [columnTitle, dispatch, hasErrors]);
 
     const onInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setColumnTitle(event.target.value);
@@ -37,8 +45,15 @@ export const AddColumnModal: FC<AddColumnModalProps> = ({ setIsOpen }) => {
                 onOkText={t('addColumnModalOkText')}
                 onOk={handleSave}
                 header={t('addColumnModalHeader')}
+                closeOnOK={closeOnOk}
             >
-               <Input label={t('addColumnTitle')}  name="columnTitle" onChange={onInputChange}/>
+                <Input label={t('addColumnTitle')}
+                       name='columnTitle'
+                       onChange={onInputChange}
+                       hasErrors={hasErrors}
+                       setHasErrors={setHasErrors}
+                       required
+                />
             </Modal>
         </>
     );

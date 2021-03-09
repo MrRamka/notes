@@ -14,7 +14,6 @@ export const listReducer = (
     state = initialState,
     action: AnyAction,
 ): ColumnsStore => {
-    console.log(state.list);
     switch (action.type) {
         case ListActionType.ADD_NEW_COLUMN:
             return {

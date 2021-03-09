@@ -7,4 +7,5 @@ export type ModalProps = {
     header?: React.ReactNode;
     onOkText?: string;
     onCloseText?: string;
+    closeOnOK?: boolean;
 }

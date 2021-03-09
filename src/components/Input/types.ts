@@ -7,6 +7,9 @@ export type InputType = {
     label: React.ReactNode;
     rules?: RuleType[];
     value?: string;
+    required?: boolean
+    hasErrors: boolean;
+    setHasErrors: (value: boolean) => void;
 }
 
 export type TextAreaType = {

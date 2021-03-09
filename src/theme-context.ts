@@ -11,4 +11,5 @@ export const ThemeContext = React.createContext({
     toggleTheme: () => {},
     setTheme: (theme: ThemeFields) => {},
     autoThemeChange: true,
+    setAutoThemeChange: () => {},
 });

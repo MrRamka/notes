@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useState } from 'react';
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import { Modal } from '../Modal';
 import { CardType } from '../../types';
 import { CardForm } from '../CardForm';
@@ -12,6 +12,12 @@ export const CardModal: FC<CardModalTypes> = (props) => {
     const { card, onCancel, cardTitle, cardDescription, setCardDescription, setCardTitle } = props;
 
     const [isOpen, setIsOpen] = useState<boolean>(true);
+    const [hasErrors, setHasErrors] = useState<boolean>(false);
+    const [closeOnOk, setCloseOnOk] = useState(false);
+
+    useEffect(() => {
+        setCloseOnOk(!hasErrors);
+    }, [hasErrors]);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -30,15 +36,17 @@ export const CardModal: FC<CardModalTypes> = (props) => {
     }, [setCardDescription]);
 
     const handleSaveCard = useCallback(() => {
-        const updatedCard: CardType = {
-            id: card.id,
-            columnId: card.columnId,
-            title: cardTitle,
-            description: cardDescription,
-        };
-
-        dispatch(updateCard(updatedCard));
-    }, [card, cardDescription, cardTitle, dispatch]);
+        if (!hasErrors) {
+            const updatedCard: CardType = {
+                id: card.id,
+                columnId: card.columnId,
+                title: cardTitle,
+                description: cardDescription,
+            };
+            dispatch(updateCard(updatedCard));
+        }
+        return;
+    }, [card, cardDescription, cardTitle, dispatch, hasErrors]);
 
     return (
         <>
@@ -50,12 +58,15 @@ export const CardModal: FC<CardModalTypes> = (props) => {
                 header={t('editCard')}
                 onCloseText={t('cancelText')}
                 onOkText={t('okText')}
+                closeOnOK={closeOnOk}
             >
                 <CardForm
                     onDescriptionChange={handleDescriptionInputChange}
                     onInputChange={handleTitleInputChange}
                     titleValue={cardTitle}
                     descriptionValue={cardDescription}
+                    hasErrors={hasErrors}
+                    setHasErrors={setHasErrors}
                 />
             </Modal>
             }

@@ -20,6 +20,6 @@
   "editCardText": "You sure cancel changes?",
   "okText": "Ok",
   "deleteColumnModalTitle": "Delete card",
-  "editCard": "Edit Card"
-
+  "editCard": "Edit Card",
+  "required": "This field is required"
 }

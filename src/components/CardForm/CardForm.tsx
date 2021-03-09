@@ -7,24 +7,41 @@ export const CardForm: FC<CardFormProps> = (props) => {
 
     const { t } = useTranslation();
 
-    const { onInputChange,
+    const {
+        onInputChange,
         onDescriptionChange,
         titleLabel = t('cardTitle'),
         descriptionLabel = t('cardDescription'),
         onOk,
         descriptionValue,
-        titleValue
+        titleValue,
+        hasErrors,
+        setHasErrors,
     } = props;
 
     const onOkFunction = useCallback(() => {
-        onOk?.();
-    }, [onOk]);
+        if (!hasErrors) {
+            onOk?.();
+        }
+    }, [onOk, hasErrors]);
 
 
     return (
         <>
-            <Input onChange={onInputChange} name='title' label={titleLabel} value={titleValue}/>
-            <TextArea onChange={onDescriptionChange}  name='description' label={descriptionLabel} value={descriptionValue}/>
+            <Input onChange={onInputChange}
+                   name='title'
+                   label={titleLabel}
+                   value={titleValue}
+                   hasErrors={hasErrors}
+                   setHasErrors={setHasErrors}
+                   required
+            />
+            <TextArea
+                onChange={onDescriptionChange}
+                name='description'
+                label={descriptionLabel}
+                value={descriptionValue}
+            />
         </>
     );
 };

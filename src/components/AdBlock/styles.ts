@@ -9,5 +9,5 @@ const keyFrames = keyframes`
 `;
 
 export const LoadingIcon = styled(AutorenewIcon)<LoadingIconType>`
-  animation: ${keyFrames} 2s infinite;
+  
 `;

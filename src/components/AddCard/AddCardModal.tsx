@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useCallback, useState } from 'react';
+import React, { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { uuidv4 } from '../../utils';
 import { CardType } from '../../types';
@@ -16,17 +16,25 @@ export const AddCardModal: FC<AddCardModalType> = ({ setIsOpen, columnId }) => {
 
     const [cardTitle, setCardTitle] = useState<string>('');
     const [cardDescription, setCardDescription] = useState<string>('');
+    const [hasErrors, setHasErrors] = useState<boolean>(false);
+    const [closeOnOk, setCloseOnOk] = useState(false);
+
+    useEffect(() => {
+        setCloseOnOk(!hasErrors);
+    }, [hasErrors]);
 
     const handleSave = useCallback(() => {
-        const uuid: string = uuidv4();
-        const card: CardType = {
-            description: cardDescription,
-            id: uuid,
-            title: cardTitle,
-            columnId: columnId,
-        };
-        dispatch(addCard(card));
-    }, [cardTitle, cardDescription, columnId, dispatch]);
+        if (!hasErrors) {
+            const uuid: string = uuidv4();
+            const card: CardType = {
+                description: cardDescription,
+                id: uuid,
+                title: cardTitle,
+                columnId: columnId,
+            };
+            dispatch(addCard(card));
+        }
+    }, [cardTitle, cardDescription, columnId, dispatch, hasErrors]);
 
     const onInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         setCardTitle(event.target.value);
@@ -44,8 +52,14 @@ export const AddCardModal: FC<AddCardModalType> = ({ setIsOpen, columnId }) => {
                 onOkText={t('addCardModalOkText')}
                 onOk={handleSave}
                 header={t('addCardModalHeader')}
+                closeOnOK={closeOnOk}
             >
-                <CardForm onInputChange={onInputChange} onDescriptionChange={onDescriptionChange} />
+                <CardForm
+                    onInputChange={onInputChange}
+                    onDescriptionChange={onDescriptionChange}
+                    hasErrors={hasErrors}
+                    setHasErrors={setHasErrors}
+                />
                 <AdBlock loadingType={false} />
             </Modal>
         </>

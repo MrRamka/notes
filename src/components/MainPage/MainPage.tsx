@@ -5,7 +5,8 @@ import { ThemeContext, themes } from '../../theme-context';
 import { Footer } from '../Footer';
 
 const TIME_DELTA = 10 * 1000;
-
+const NIGHT  = 18;
+const DAY = 6
 
 export const MainPage: FC = () => {
 
@@ -23,17 +24,19 @@ export const MainPage: FC = () => {
         marginTop: '6rem'
     }
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         const date = new Date();
-    //         //refactor
-    //         if (date.getHours() > 18 || date.getHours() < 6) {
-    //             themeContext.setTheme(themes.dark);
-    //         } else {
-    //             themeContext.setTheme(themes.light);
-    //         }
-    //     }, TIME_DELTA);
-    // }, [themeContext]);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const date = new Date();
+            //refactor
+            if (themeContext.autoThemeChange){
+                if (date.getHours() > NIGHT || date.getHours() < DAY) {
+                    themeContext.setTheme(themes.dark);
+                } else {
+                    themeContext.setTheme(themes.light);
+                }
+            }
+        }, TIME_DELTA);
+    }, [themeContext]);
 
 
     return (
@@ -44,9 +47,8 @@ export const MainPage: FC = () => {
                     <NotesContainer />
                 </div>
             </div>
-            {
-                //<Footer />
-            }
+
+                <Footer/>
 
 
         </>

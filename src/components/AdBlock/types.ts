@@ -3,5 +3,5 @@ export type AdBlockType = {
 }
 
 export type LoadingIconType = {
-    iconColor: string;
+    icon_color: string;
 }

@@ -10,7 +10,7 @@ import { Button } from '../Buttons';
 
 export const Modal: FC<ModalProps> = (props) => {
 
-    const { children, setOpen, onOk, onClose, header, onCloseText, onOkText } = props;
+    const { children, setOpen, onOk, onClose, header, onCloseText, onOkText, closeOnOK = true } = props;
 
     const handleClose = useCallback((e: React.MouseEvent<HTMLElement>) => {
         onClose?.(e);
@@ -19,8 +19,10 @@ export const Modal: FC<ModalProps> = (props) => {
 
     const handleSubmit = useCallback((e: React.MouseEvent<HTMLElement>) => {
         onOk?.(e);
-        setOpen(false);
-    }, [onOk, setOpen]);
+        if (closeOnOK) {
+            setOpen(false);
+        }
+    }, [onOk, setOpen, closeOnOK]);
 
 
     const theme = useContext(ThemeContext);

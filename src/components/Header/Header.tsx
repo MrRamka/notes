@@ -36,6 +36,10 @@ export const Header: FC = () => {
         i18n.changeLanguage(event.target.value as string);
     }, [i18n]);
 
+    const onAutoThemeChange = useCallback(() => {
+        themeContext.setAutoThemeChange();
+    }, [themeContext]);
+
     return (
 
         <AppHeaderBar position='fixed' bgColor={themeContext.theme.surface}>
@@ -45,7 +49,8 @@ export const Header: FC = () => {
                 </ThemeTypography>
 
                 <FormControlLabel
-                    control={<AutoThemeCheckBox name='autoSwitchTheme' bgColor={themeContext.theme.on_surface} />}
+                    control={<AutoThemeCheckBox name='autoSwitchTheme' bgColor={themeContext.theme.on_surface}
+                                                checked={themeContext.autoThemeChange} onClick={onAutoThemeChange} />}
                     label={
                         <ThemeTypography>
                             {t('auto_change_theme')}

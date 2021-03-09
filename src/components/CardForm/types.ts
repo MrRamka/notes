@@ -8,4 +8,6 @@ export type CardFormProps = {
     onOk?: () => void;
     titleValue?: string;
     descriptionValue?: string;
+    hasErrors: boolean;
+    setHasErrors: (value: boolean) => void;
 }
